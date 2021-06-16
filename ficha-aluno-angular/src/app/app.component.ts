@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ficha-aluno-angular';
-}
+  generatePdf(){
+   const documentDefinition = { content: 'Esse é um arquivo PDF gerado com pdfMake' };
+   pdfMake.createPdf(documentDefinition).open();
+  }
+ }
