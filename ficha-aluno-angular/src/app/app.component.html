@@ -1,1 +1,224 @@
-<button (click)="generatePdf()">Abrir PDF</button>
+<nav class="navbar navbar-expand navbar-light bg-primary d-flex justify-content-between">
+  <div class="navbar-brand mb-0 h1 text-white">Ficha do Aluno</div>
+  <div class="navbar-brand mb-0 h1 text-white">
+    <a href="https://grandeporte.com.br/" title="Blog" class="text-white h5"><i class="fas fa-globe"></i> Grande Porte</a>
+  </div>
+</nav>
+<div class="container-fluid">
+  <form #fichaForm="ngForm">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="shadow-sm card">
+          <div class="card-body">
+            <h4 class="card-title d-flex align-items-center">
+              <i class="material-icons">
+                account_box
+              </i>
+              Dados Pessoais</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="ficha.name" name="name" placeholder="Nome"
+                    #Name="ngModel" required
+                    [ngClass]="{'is-invalid': Name.invalid && (Name.touched || fichaForm.submitted) }">
+                </div>
+                <div class="form-group">
+                  <div class="form-group">
+                    <textarea class="form-control" [(ngModel)]="ficha.address" name="address" rows="1"
+                      placeholder="Data de Nascimento" #Address="ngModel" required
+                      [ngClass]="{'is-invalid': Address.invalid && (Address.touched || fichaForm.submitted) }"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control" [(ngModel)]="ficha.cidade" name="cidade"
+                      placeholder="Cidade ">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="ficha.contactNo" name="contactNo"
+                    placeholder="Celular" #ContactNo="ngModel" required
+                    [ngClass]="{'is-invalid': ContactNo.invalid && (ContactNo.touched || fichaForm.submitted) }">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="ficha.email" name="emailId"
+                    placeholder="Email" #Email="ngModel" required
+                    [ngClass]="{'is-invalid': Email.invalid && (Email.touched || fichaForm.submitted) }">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="ficha.socialProfile" name="socialProfile"
+                    placeholder="CPF ">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tecnologias -->
+        <div class="shadow-sm card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between card-title">
+              <h4 class="d-flex align-items-center">
+                <i class="material-icons">
+                  assignment
+                </i>
+                Tecnologias</h4>
+              <button class="btn btn-primary" (click)="addSkill()">+</button>
+            </div>
+            <div class="row">
+              <div class="col-md-4" *ngFor="let s of ficha.skills; let i=index">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="skill{{i}}" [(ngModel)]="s.value"
+                    placeholder="Ex: HTML, CSS, Java, etc. " #Skill="ngModel" required
+                    [ngClass]="{'is-invalid': Skill.invalid && (Skill.touched || fichaForm.submitted) }">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Experience -->
+        <div class="shadow-sm card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between card-title">
+              <h4 class="d-flex align-items-center">
+                <i class="material-icons">
+                  card_travel
+                </i>
+                Experiência</h4>
+              <button class="btn btn-primary" (click)="addExperience()">+</button>
+            </div>
+            <div class="row" *ngFor="let ex of ficha.experiences; let i=index">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="employer{{i}}" [(ngModel)]="ex.employer"
+                    placeholder="Empresa" #Employer="ngModel" required
+                    [ngClass]="{'is-invalid': Employer.invalid && (Employer.touched || fichaForm.submitted) }">
+                </div>
+                <div class="form-group">
+                  <div class="form-group">
+                    <textarea class="form-control" name="jobDescription{{i}}" [(ngModel)]="ex.jobDescription" rows="3"
+                      placeholder="Atividades"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="jobTitle{{i}}" [(ngModel)]="ex.jobTitle"
+                    placeholder="Cargo" #JobTitle="ngModel" required
+                    [ngClass]="{'is-invalid': JobTitle.invalid && (JobTitle.touched || fichaForm.submitted) }">
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-control" name="exInMonths{{i}}" [(ngModel)]="ex.experience"
+                    placeholder="Tempo de experiência em meses" #Experience="ngModel" required
+                    [ngClass]="{'is-invalid': Experience.invalid && (Experience.touched || fichaForm.submitted) }">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="shadow-sm card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between card-title">
+              <h4 class="d-flex align-items-center">
+                <i class="material-icons">
+                  school
+                </i>
+                Escolaridade</h4>
+              <button class="btn btn-primary" (click)="addEducation()">+</button>
+            </div>
+            <div class="row" *ngFor="let ed of ficha.educations; let i=index">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <select class="form-control" placeholder="Degree" name="degree{{i}}" [(ngModel)]="ed.degree"
+                    #Degree="ngModel" required
+                    [ngClass]="{'is-invalid': Degree.invalid && (Degree.touched || fichaForm.submitted) }">
+                    <option [value]="d" *ngFor="let d of degrees">{{d}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="college{{i}}" [(ngModel)]="ed.college"
+                    placeholder="Instituição" #College="ngModel" required
+                    [ngClass]="{'is-invalid': College.invalid && (College.touched || fichaForm.submitted) }">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="number" class="form-control" name="passingYear{{i}}" [(ngModel)]="ed.passingYear"
+                    placeholder="Ano" #PassingYear="ngModel" required
+                    [ngClass]="{'is-invalid': PassingYear.invalid && (PassingYear.touched || fichaForm.submitted) }">
+                </div>
+              </div>
+              <!--
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="number" class="form-control" name="result{{i}}" [(ngModel)]="ed.percentage"
+                    placeholder="Percentage" #Percentage="ngModel" required
+                    [ngClass]="{'is-invalid': Percentage.invalid && (Percentage.touched || fichaForm.submitted) }">
+                </div>
+              </div>
+              -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Other Details -->
+
+        <div class="shadow-sm card">
+          <div class="card-body">
+            <h4 class="card-title d-flex align-items-center">
+              <i class="material-icons"> list </i>Fale sobre você</h4>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <textarea type="text" class="form-control" [(ngModel)]="ficha.otherDetails" name="otherDetails"
+                    rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="shadow-sm card action-buttons">
+          <button (click)="fichaForm.valid ? generatePdf('open') : ''"
+            class="btn btn-primary d-flex align-items-center justify-content-center">
+            <i class="material-icons">
+              picture_as_pdf
+            </i> <span> Abrir PDF</span></button>
+          <button (click)="fichaForm.valid ? generatePdf('download') : ''"
+            class="btn btn-primary d-flex align-items-center justify-content-center">
+            <i class="material-icons">
+              cloud_download
+            </i><span> Baixar PDF</span></button>
+          <button (click)="fichaForm.valid ? generatePdf('print') : ''"
+            class="btn btn-primary d-flex align-items-center justify-content-center">
+            <i class="material-icons">
+              print
+            </i><span> Imprimir PDF</span></button>
+
+          <button type='reset' (click)="resetForm()"
+            class="btn btn-primary d-flex align-items-center justify-content-center">
+            <i class="material-icons">
+              clear
+            </i><span> Limpar</span></button>
+        </div>
+
+        <div class="card p-4">
+          <div class="form-group">
+            <label class="h4 mb-3" for="">Selecione uma foto sua: </label>
+            <input type="file" class="form-control-file" (change)="fileChanged($event)" aria-describedby="fileHelpId">
+          </div>
+          <img *ngIf="ficha.profilePic" [src]="ficha.profilePic" class="img-thumbnail">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

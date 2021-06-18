@@ -1,0 +1,29 @@
+.row{
+  padding: 10px;
+}
+
+.card{
+  margin: 10px;
+}
+
+.material-icons{
+  font-size: 30px;
+}
+
+button span{
+  font-size: 22px;
+}
+
+.action-buttons button{
+  margin : 5px;
+}
+
+.bg-primary {
+  background-color: #E25721!important;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #E25721;
+  border-color: #E25721;
+}
