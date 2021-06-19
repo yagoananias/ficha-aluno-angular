@@ -5,7 +5,7 @@ interface Scripts {
   src: string;
 }
 export const ScriptStore: Scripts[] = [
-  { name: 'pdfMake', src: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/pdfmake.min.js' },
+  { name: 'pdfMake', src: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.71/pdfmake.min.js' },
   { name: 'vfsFonts', src: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js' }
 ];
 
